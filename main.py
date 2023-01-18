@@ -23,7 +23,7 @@ scraper = cloudscraper.create_scraper()
 async def set(inter: disnake.ApplicationCommandInteraction, bot_id: str):
     data = {"character_external_id":bot_id}
     url = "https://beta.character.ai/chat/history/create/"
-    headers = {'authorization':'Token ddfe75be86e2af0626bf5c015edb51c2cdfaa429'}
+    headers = {'authorization':'YOUR CAI TOKEN'}
     response = scraper.post(url, data=data, headers=headers)
     jsontext = json.loads(response.text)
     print(jsontext)
@@ -74,4 +74,4 @@ async def chat(inter: disnake.ApplicationCommandInteraction, chat: str):
 async def on_ready():
     print(f"Logged in as {bot.user} (ID: {bot.user.id})\n------")
 
-bot.run('MTA2NDkyNzIzNjgzNjMwNzAxNA.Ghx_8u.Xux0hca6QGiy2u2aIW7L4E-VJrdJZYl3TyIda8')
+bot.run('YOUR BOT TOKEN')
