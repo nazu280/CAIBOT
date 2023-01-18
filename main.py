@@ -10,6 +10,9 @@ global internal_id
 global botname
 global botid
 
+token = "디스코드 토큰입력"
+token2 = "CAI력토큰입력"
+
 bot = commands.Bot(
     command_prefix='!',
     # test_guilds=[975696347506311168],
@@ -23,7 +26,7 @@ scraper = cloudscraper.create_scraper()
 async def set(inter: disnake.ApplicationCommandInteraction, bot_id: str):
     data = {"character_external_id":bot_id}
     url = "https://beta.character.ai/chat/history/create/"
-    headers = {'authorization':'YOUR CAI TOKEN'}
+    headers = {'authorization':token2}
     response = scraper.post(url, data=data, headers=headers)
     jsontext = json.loads(response.text)
     print(jsontext)
@@ -60,7 +63,7 @@ async def chat(inter: disnake.ApplicationCommandInteraction, chat: str):
             _botid, _history, _internal, _bot_name = userInfo(userRow)
             data = {'history_external_id':_history, 'character_external_id':_botid, 'text':chat, 'tgt':_internal}
             url = "https://beta.character.ai/chat/streaming/"
-            headers = {'authorization':'Token ddfe75be86e2af0626bf5c015edb51c2cdfaa429'}
+            headers = {'authorization':token2}
             await inter.response.send_message("응답 대기 중...\n오랜 시간이 소요될 수 있습니다.")
             response = scraper.post(url, data=data, headers=headers)
             print(response.text)
@@ -74,4 +77,4 @@ async def chat(inter: disnake.ApplicationCommandInteraction, chat: str):
 async def on_ready():
     print(f"Logged in as {bot.user} (ID: {bot.user.id})\n------")
 
-bot.run('YOUR BOT TOKEN')
+bot.run(token)
